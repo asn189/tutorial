@@ -1,0 +1,146 @@
+Error's rises regarding with website hosting
+
+* HTTP Errors
+
+HTTP error is a response code in reply of the request sent by the browser when the webserver fails to serve the requested data. This response code tells the reason for the failure of the response, in the form of an error code.
+Most Common HTTP Error:
+
+h3. HTTP Error 401 – Unauthorized
+h3. HTTP Error 400 – Bad Request
+h3. HTTP Error 404 – Page Not Found
+h3. HTTP Error 403 – Forbidden Error
+h3. HTTP Error 500 – Internal Error
+h3. HTTP Error 503 – Service Unavailable
+
+HTTP ERROR 401- Unauthorized - this error happens when someone tries to access a page for which they are not authorized. You can usually fix this error by reviewing the URL of the page that is causing the error; it’s possible that the link clicked is one that is for authorized users only (for example, users who have logins with a valid user ID and password).
+
+HTTP Error 400 – Bad Request - The HTTP Error 400 means that the servers do not understand the request that the client has sent. The request could be incorrect or corrupted or does not have complete information.
+
+HTTP Error 403 – Forbidden Error -
+HTTP 403 Error means that the webserver is not letting you access the pages or data that you asked for.
+
+HTTP Error 500 – Internal Server Error - It is a general HTTP error that does not have any definitive explanation. It means that there is some unresolved internal issue with the server, so it cannot parse the request or send the response accordingly.
+When something goes wrong on the website’s server, the page loads to displays the HTTP Error 500 page. The reason might be high concurrent traffic and not enough bandwidth or the lack of storage.
+Whatever the reason, if there is an issue with the website server that is not specific, it will return 500 Error.
+
+HTTP Error 503 – Service Unavailable - It is a temporary issue message.
+If you see this message, it means that the webserver is not currently available. It may be because of a temporary overload of traffic on the site or scheduled maintenance.
+
+504 (Gateway timeout) - another common one, a 504 error signifies a gateway timeout, which happens when one server did not receive a timely response from another server when it was attempting to load the page. Most of the time this issue is not the
+fault of a website, but there are a few ways to troubleshoot the error.
+
+* LONG METADATA
+
+Metadata error : Cannot read frame data: Failed to read frame data from (path to media file) at offset (number), size (number), read (number). This has been caused by corrupt media in a sequence. Send a different sequence containing completely different media from your original sequence to test basic transfers.
+A simple example of metadata for a document might include a collection of information like the author, file size, the date the document was created, and keywords to describe the document
+
+* Expiring Domain Name
+
+Search engines prefer to return results of websites that are active and long-standing. Having your domain name registered for multiple years shows a commitment to your business, your site and your content.
+
+ERROR CODES
+
+In computer programming, a return code or an error code is a numeric or alphanumeric code that is used to determine the nature of an error and why it occurred.
+
+300 -The requested address refers to more than one file. Depending on how the server is configured, you get an error or a choice of which page you want
+
+301 - Moved Permanently - if the server is set up properly it will automatically redirect the reader to the new location of the file.
+
+302 - Found - page has been moved temporarily, and the new URL is available. You should be sent there by the server
+
+303 - This is a "see other" SRC. Data is somewhere else and the GET method is used to retrieve it.
+
+304 - Not Modified - if the request header includes an 'if modified since' parameter, this code will be returned if the file has not changed since that date. Search engine robots may generate a lot of these.
+
+400-499 - Request is incomplete for some reason.
+
+400 - Bad Request - there is a syntax error in the request, and it is denied.
+
+401 - The request header did not contain the necessary authentication codes, and the client is denied access.
+
+402 - Payment is required. This code is not yet in operation
+
+403 - Forbidden - the client is not allowed to see a certain file. This is also returned at times when the server doesn't want any more visitors.
+
+404 - Document not found - the requested file was not found on the server. Possibly because it was deleted, or never existed before. Often caused by misspellings of URLs.
+
+405 - The method you are using to access the file is not allowed.
+
+406 - The requested file exists but cannot be used as the client system doesn't understand the format the file is configured for.
+
+407 - The request must be authorised before it can take place.
+
+408 - Request Timeout ? the server took longer than its allowed time to process the request. Often caused by heavy net traffic.
+
+409 - Too many concurrent requests for a single file.
+
+410 - The file used to be in this position, but is there no longer.
+
+411 - The request is missing its Content-Length header.
+
+412 - A certain configuration is required for this file to be delivered, but the client has not set this up.
+
+413 - The requested file was too big to process.
+
+414 - The address you entered was overly long for the server
+
+415 - The filetype of the request is unsupported.
+
+500 - Internal Server Error ? nasty response that is usually caused by a problem in your Perl code when a CGI program is run.
+
+
+
+Troubleshoot Common Apache Errors
+
+
+The commands that you will commonly use to troubleshoot Apache across most Linux distributions are:
+
+systemctl - Used to control and interact with Linux services via the systemd service manager.
+
+
+journalctl - Used to query and view the logs that are generated by systemd.
+
+
+apachectl - When troubleshooting, this command is used to check Apache’s configuration.
+
+
+* systemctl Commands for Apache
+
+
+To troubleshoot common Apache errors using the systemd service manager, the first step is to inspect the state of the Apache processes on your system. The following systemctl commands will query systemd for the state of Apache’s processes.
+
+sudo systemctl status httpd.service -l --no-pager
+
+If there is a problem with your Apache process or configuration you can troubleshoot it further using the journalctl command.
+
+
+* journalctl Commands for Apache
+
+
+To inspect the systemd logs for Apache, you can use the journalctl command. The systemd logs for Apache will usually indicate whether there is a problem with starting or managing the Apache process.
+These logs are separate from Apache’s request and error logs. journalctl displays logs from systemd that describe the Apache service itself, from startup to shutdown, along with any process errors that may be encountered along the way.
+
+sudo journalctl -u httpd.service --since today --no-pager
+
+If there is an error, you will have a line in the output that is similar to the following, with the main difference between Linux distributions being the highlighted yourhostname portion
+
+Example Error Output
+Jul 14 20:13:37 yourhostname systemd[1]: Failed to start The Apache HTTP Server.
+
+
+
+* Troubleshooting with apachectl
+
+
+Most Linux distributions include the apachectl utility with Apache. apachectl is an invaluable tool to help detect and diagnose Apache configuration problems.
+To troubleshoot issues using apachectl, test your Apache configuration using the apachectl configtest command. The tool will parse your Apache files and detect any errors or missing settings before attempting to start the server.
+
+sudo apachectl configtest
+
+
+
+Apache Log Files
+
+
+Apache log files are a very helpful resource for troubleshooting. Generally, any error that you receive in a browser or other HTTP client will have a corresponding entry in Apache’s logs.
+To examine log files for errors while troubleshooting Apache on a Fedora, CentOS, or RedHat server, examine the /var/log/httpd/error_log file.
